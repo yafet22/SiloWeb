@@ -19,3 +19,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::post('send-sms','SmsController@store');
 Route::post('verify-user','SmsController@verifyContact');
+
+Route::resource('user','UserRestController');
