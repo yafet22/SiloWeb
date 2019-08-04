@@ -24,15 +24,30 @@ class postingController extends Controller
      */
     public function create(request $request)
     {
-        
-        $posting = new Posting;
-        $posting->title = $request->title;
-        $posting->photo = $request->photo;
-        $posting->description = $request->description;
-        $posting->category = $request->category;
-        $posting->save();
+        try {
+            $posting = new Posting;
+            if($request->hasfile('photo'))
+                {
+                    $file = $request->file('photo');
+                    $name=time().$file->getClientOriginalName();
+                    $file->move(public_path().'/images/', $name);
+                    $posting->photo = $name;
+                }
+                else{
+                    $posting->photo=NULL;
+                }
 
-        return "data berhasil diinputkan";
+                    $posting->title = $request->title;
+                    $posting->photo = $request->photo;
+                    $posting->description = $request->description;
+                    $posting->category = $request->category;
+                    $posting->save();
+
+                    return "data berhasil diinputkan";
+        } catch (\Exception $e) {
+            return $this->sendIseResponse($e->getMessage());
+        }
+
 
     }
 
@@ -78,20 +93,34 @@ class postingController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $title = $request->title;
-        $photo = $request->photo;
-        $description = $request->description;
-        $category = $request->category;
+        try {
+            $posting=Posting::find($id);
 
-        $posting = Posting::find($id);
-        $posting->title = $title;
-        $posting->photo = $photo;
-        $posting->description = $description;
-        $posting->description = $description;
+            if($request->hasfile('photo'))
+            {
+                $file = $request->file('photo');
+                $name=time().$file->getClientOriginalName();
+                $file->move(public_path().'/images/', $name);
+                $posting->photo=$name;
+            }
+                $title = $request->title;
+                $photo = $request->photo;
+                $description = $request->description;
+                $category = $request->category;
 
-        $posting->save();
+                $posting = Posting::find($id);
+                $posting->title = $title;
+                $posting->photo = $photo;
+                $posting->description = $description;
+                $posting->description = $description;
 
-        return "data Updated";
+                $posting->save();
+
+                return "data Updated";
+
+        } catch (\Exception $e) {
+            return $this->sendIseResponse($e->getMessage());
+        }
 
 
     }
