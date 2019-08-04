@@ -25,7 +25,4 @@ Route::get('posting','postingController@index');
 Route::put('/posting/{id}','postingController@update');
 Route::get('/posting/{id}','postingController@destroy');
 
-
-
 Route::resource('user','UserRestController');
-

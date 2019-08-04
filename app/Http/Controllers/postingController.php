@@ -24,6 +24,7 @@ class postingController extends Controller
      */
     public function create(request $request)
     {
+        
         $posting = new Posting;
         $posting->title = $request->title;
         $posting->photo = $request->photo;
