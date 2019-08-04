@@ -343,66 +343,6 @@
                               </td>
                             </tr>
                             @endforeach
-                            <!-- <tr>
-                                <td>2</td>
-                                <td><div class="blog-comments__avatar mr-3">
-                                  <img src="images/avatars/yuri.png" alt="User avatar"/> </div> </div></td>
-                                <td>Agung</td>
-                                <td>081254026142</td>
-                                <td>
-                                  <div class="btn-group btn-group-toggle mb-3" data-toggle="buttons">
-                                    <label class="btn btn-white active">
-                                      <input type="radio" name="options" id="option1" autocomplete="off" checked> Aktiv </label>
-                                    <label class="btn btn-white">
-                                      <input type="radio" name="options" id="option2" autocomplete="off"> Tidak Aktiv </label>
-                                  </div>
-                                </td>
-                              </tr>
-                              <tr>
-                                  <td>3</td>
-                                  <td><div class="blog-comments__avatar mr-3">
-                                    <img src="images/avatars/yuri.png" alt="User avatar" /> </div> </div></td>
-                                  <td>Agung</td>
-                                  <td>081254026142</td>
-                                  <td>
-                                    <div class="btn-group btn-group-toggle mb-3" data-toggle="buttons">
-                                      <label class="btn btn-white active">
-                                        <input type="radio" name="options" id="option1" autocomplete="off" checked> Aktiv </label>
-                                      <label class="btn btn-white">
-                                        <input type="radio" name="options" id="option2" autocomplete="off"> Tidak Aktiv </label>
-                                    </div>
-                                  </td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td><div class="blog-comments__avatar mr-3">
-                                      <img src="images/avatars/yuri.png" alt="User avatar" /> </div> </div></td>
-                                    <td>Agung</td>
-                                    <td>081254026142</td>
-                                    <td>
-                                      <div class="btn-group btn-group-toggle mb-3" data-toggle="buttons">
-                                        <label class="btn btn-white active">
-                                          <input type="radio" name="options" id="option1" autocomplete="off" checked> Aktiv </label>
-                                        <label class="btn btn-white">
-                                          <input type="radio" name="options" id="option2" autocomplete="off"> Tidak Aktiv </label>
-                                      </div>
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                      <td>5 </td>
-                                      <td><div class="blog-comments__avatar mr-3">
-                                        <img src="images/avatars/yuri.png" alt="User avatar" /> </div> </div></td>
-                                      <td>Agung</td>
-                                      <td>081254026142</td>
-                                      <td>
-                                        <div class="btn-group btn-group-toggle mb-3" data-toggle="buttons">
-                                          <label class="btn btn-white">
-                                            <input type="radio" name="options" id="option1" autocomplete="off" checked> Aktiv </label>
-                                          <label class="btn btn-white active">
-                                            <input type="radio" name="options" id="option2" autocomplete="off"> Tidak Aktiv </label>
-                                        </div>
-                                      </td>
-                                    </tr> -->
                           </tbody>
                         </table>
                       </div>
