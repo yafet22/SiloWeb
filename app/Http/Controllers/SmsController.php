@@ -20,8 +20,8 @@ class SmsController extends Controller
     {
         $code = rand(1000, 9999); //generate random code
         $request['code'] = $code; //add code in $request body
-        $this->smsVerifcation->store($request); //call store method of model
-        return $this->sendSms($request); // send and return its response
+        $result = $this->smsVerifcation->store($request); //call store method of model
+        return $this->sendSms($request,$result); // send and return its response
     }
 
     public function verifyContact(Request $request)
@@ -45,14 +45,14 @@ class SmsController extends Controller
         }
     }
 
-    public function sendSms($request)
+    public function sendSms($request,$result)
     {
         $accountSid = config('app.twilio')['TWILIO_ACCOUNT_SID'];
         $authToken = config('app.twilio')['TWILIO_AUTH_TOKEN'];
         try
         {
             $client = new Client(['auth' => [$accountSid, $authToken]]);
-            $result = $client->post('https://api.twilio.com/2010-04-01/Accounts/'.$accountSid.'/Messages.json',
+            $result2 = $client->post('https://api.twilio.com/2010-04-01/Accounts/'.$accountSid.'/Messages.json',
             ['form_params' => [
             'Body' => 'CODE: '. $request->code, //set message body
             'To' => $request->phone_number,

@@ -42,7 +42,7 @@ class User extends Authenticatable
     {
         $this->fill($request->all());
         $sms = $this->save();
-        return response()->json($sms, 200);
+        return response()->json($this, 200);
     }
     public function updateModel($request)
     {
