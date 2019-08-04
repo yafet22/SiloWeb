@@ -11,8 +11,4 @@
 |
 */
 
-// Route::get('/', function () {
-//     return view('index');
-// });
-
 Route::get('/', 'DashboardController@index')->name('home');
