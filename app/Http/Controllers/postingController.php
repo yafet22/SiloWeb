@@ -3,8 +3,13 @@
 namespace App\Http\Controllers;
 use App\Posting;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use App\Transformers\PostingTransformer;
 
-class postingController extends Controller
+class postingController extends RestController
 {
     /**
      * Display a listing of the resource.
@@ -13,8 +18,9 @@ class postingController extends Controller
      */
     public function index()
     {
-        return Posting::all();
-        
+        $posting = Posting::all();
+        $response = $this->generateCollection($posting);
+        return $this->sendResponse($response);       
     }
 
     /**
@@ -22,31 +28,8 @@ class postingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(request $request)
+    public function create()
     {
-        try {
-            $posting = new Posting;
-            if($request->hasfile('photo'))
-                {
-                    $file = $request->file('photo');
-                    $name=time().$file->getClientOriginalName();
-                    $file->move(public_path().'/images/', $name);
-                    $posting->photo = $name;
-                }
-                else{
-                    $posting->photo=NULL;
-                }
-
-                    $posting->title = $request->title;
-                    $posting->photo = $request->photo;
-                    $posting->description = $request->description;
-                    $posting->category = $request->category;
-                    $posting->save();
-
-                    return "data berhasil diinputkan";
-        } catch (\Exception $e) {
-            return $this->sendIseResponse($e->getMessage());
-        }
 
 
     }
@@ -59,7 +42,37 @@ class postingController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request,[
+            'photo' => 'required',
+            'title' => 'required',
+            'description' => 'required',
+            'category' => 'required',
+
+        ]);
+
+        try {
+            $posting = new Posting;
+            if($request->hasfile('photo'))
+            {
+                $file = $request->file('photo');
+                $name=time().$file->getClientOriginalName();
+                $file->move(public_path().'/images/', $name);
+                $posting->photo = $name;
+            }
+            else{
+                $posting->photo=NULL;
+            }
+
+            $posting->title = $request->title;
+            $posting->description = $request->description;
+            $posting->category = $request->category;
+            $posting->save();
+
+            $response = $this->generateItem($posting);
+            return $this->sendResponse($response, 201);
+        } catch (\Exception $e) {
+            return $this->sendIseResponse($e->getMessage());
+        }
     }
 
     /**
@@ -70,7 +83,15 @@ class postingController extends Controller
      */
     public function show($id)
     {
-        //
+        try {
+            $posting=Posting::find($id);
+            $response = $this->generateItem($posting);
+            return $this->sendResponse($response);
+        } catch (ModelNotFoundException $e) {
+            return $this->sendNotFoundResponse('posting_not_found');
+        } catch (\Exception $e) {
+            return $this->sendIseResponse($e->getMessage());
+        }
     }
 
     /**
@@ -103,26 +124,22 @@ class postingController extends Controller
                 $file->move(public_path().'/images/', $name);
                 $posting->photo=$name;
             }
-                $title = $request->title;
-                $photo = $request->photo;
-                $description = $request->description;
-                $category = $request->category;
-
-                $posting = Posting::find($id);
-                $posting->title = $title;
-                $posting->photo = $photo;
-                $posting->description = $description;
-                $posting->description = $description;
-
+                
+                $posting->title=$request->get('title');
+                $posting->description=$request->get('description');
+                $posting->category=$request->get('category');
                 $posting->save();
 
-                return "data Updated";
+                $response = $this->generateItem($posting);
 
-        } catch (\Exception $e) {
+            return $this->sendResponse($response, 201);
+
+        } catch (ModelNotFoundException $e) {
+            return $this->sendNotFoundResponse('posting_not_found');
+        }
+        catch (\Exception $e) {
             return $this->sendIseResponse($e->getMessage());
         }
-
-
     }
 
     /**
@@ -133,9 +150,16 @@ class postingController extends Controller
      */
     public function destroy($id)
     {
-        $posting = Posting::find($id);
-        $posting->delete();
+        try {
+            $posting = Posting::find($id);
+            $posting->delete();
+            return response()->json('Success',200);
+    
+        } catch (ModelNotFoundException $e) {
+            return $this->sendNotFoundResponse('posting_not_found');
+        } catch (\Exception $e) {
+            return $this->sendIseResponse($e->getMessage());
+        }
 
-        return "data deleted";
     }
 }

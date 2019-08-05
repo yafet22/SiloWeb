@@ -20,9 +20,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('send-sms','SmsController@store');
 Route::post('verify-user','SmsController@verifyContact');
 
-Route::post('posting','postingController@create');
-Route::get('posting','postingController@index');
-Route::put('/posting/{id}','postingController@update');
-Route::get('/posting/{id}','postingController@destroy');
+// Route::post('posting','postingController@create');
+// Route::get('posting','postingController@index');
+// Route::patch('/posting/{id}','postingController@update');
+// Route::get('/posting/{id}','postingController@destroy');
 
 Route::resource('user','UserRestController');
+Route::resource('posting','postingController');
+
