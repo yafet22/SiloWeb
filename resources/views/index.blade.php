@@ -43,7 +43,7 @@
           <div class="nav-wrapper">
             <ul class="nav flex-column">
               <li class="nav-item">
-                <a class="nav-link active" href="index.html">
+                <a class="nav-link active" href="{{ url('index') }}">
                   <i class="material-icons">edit</i>
                   <span>Dashboard</span>
                 </a>
@@ -55,13 +55,13 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link " href="add-new-post.html">
+                <a class="nav-link " href="{{ url('add-new-post') }}">
                   <i class="material-icons">note_add</i>
                   <span>Tambah Postingan Baru</span>
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link " href="user-profile.html">
+                <a class="nav-link " href="{{ url('user-profile') }}">
                   <i class="material-icons">person</i>
                   <span>Profile Pengguna</span>
                 </a>
