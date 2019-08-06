@@ -9,8 +9,9 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use App\Transformers\PostingTransformer;
 
-class postingController extends RestController
+class PostingRestController extends RestController
 {
+    protected $transformer = PostingTransformer::class;
     /**
      * Display a listing of the resource.
      *
@@ -18,8 +19,8 @@ class postingController extends RestController
      */
     public function index()
     {
-        $posting = Posting::all();
-        $response = $this->generateCollection($posting);
+        $postings = Posting::all();
+        $response = $this->generateCollection($postings);
         return $this->sendResponse($response);       
     }
 
@@ -52,6 +53,7 @@ class postingController extends RestController
 
         try {
             $posting = new Posting;
+
             if($request->hasfile('photo'))
             {
                 $file = $request->file('photo');
