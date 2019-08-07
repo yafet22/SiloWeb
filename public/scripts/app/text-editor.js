@@ -22,5 +22,9 @@
       theme: 'snow'
     });
 
+    // $("#identifier").on("submit",function(){
+    //   $("#hiddenArea").val($("#editor-container").html());
+    // })
+
   });
 })(jQuery);

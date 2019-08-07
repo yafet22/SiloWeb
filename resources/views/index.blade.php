@@ -43,7 +43,7 @@
           <div class="nav-wrapper">
             <ul class="nav flex-column">
               <li class="nav-item">
-                <a class="nav-link active" href="{{ url('index') }}">
+                <a class="nav-link active" href="{{ url('/') }}">
                   <i class="material-icons">edit</i>
                   <span>Dashboard</span>
                 </a>
@@ -55,7 +55,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link " href="{{ url('add-new-post') }}">
+                <a class="nav-link " href="{{ url('/add-new-post') }}">
                   <i class="material-icons">note_add</i>
                   <span>Tambah Postingan Baru</span>
                 </a>

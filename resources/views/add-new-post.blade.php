@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>admin SELO</title>
+    <title>Admin SELO</title>
     <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
@@ -150,22 +150,28 @@
               </div>
             </div>
             <!-- End Page Header -->
+            {!!Form::open(array('route' => 'Posting.store','method'=>'POST','enctype'=>'multipart/form-data','id'=>'identifier'))!!}
             <div class="row">
               <div class="col-lg-9 col-md-12">
                 <!-- Add New Post Form -->
                 <div class="card card-small mb-3">
                   <div class="card-body">
-                    <form class="add-new-post">
-                      <input class="form-control form-control-lg mb-3" type="text" placeholder="judul">
+                    <!-- <form class="add-new-post"> -->
+                      <!-- <input class="form-control form-control-lg mb-3" type="text" placeholder="judul"> -->
+                      {!!Form::text('title',null,array('placeholder'=>'Judul','class'=>'form-control form-control-lg mb-3','id'=>'inputJudul'))!!}  
                       <div class="form-group">
-                        <select class="form-control">
+                        <!-- <select class="formcomposer require "laravelcollective/html":"^5.8.0"-control">
                           <option selected>Pilih Kategory</option>
                           <option>Bencana Alam</option>
                           <option>Pertanian</option>
-                        </select>
+                        </select> -->
+                        {!!Form::select('category', array('Bencana Alam' => 'Bencana Alam', 'Pertanian' => 'Pertanian'),'Bencana Alam',array('class'=>'form-control','id'=>'inputKategori'))!!}
                       </div>
-                      <div id="editor-container" class="add-new-post__editor mb-1"></div>
-                    </form>
+                      <!-- <div id="editor-container" class="add-new-post__editor mb-1"></div> -->
+                      <!-- <textarea name="descrption" style="display:none" id="hiddenArea"></textarea> -->
+                      {!!Form::textarea('description',null,array('placeholder'
+                                        =>'Deskripsi','class'=>'form-control','rows'=>'18','id'=>'hiddenArea'))!!}  
+                    <!-- </form> -->
                   </div>
                 </div>
                 <!-- / Add New Post Form -->
@@ -181,6 +187,7 @@
                       <div class="col-lg-12 col-md12">
                           <div class="card-height">
                             <img src="images/upload.jpg" alt="upload" class="image-upload" />
+                            {!!Form::file('photo',array('class'=>'text-center center-block file-upload'))!!}
                             <div class="form-group" style="padding:10px">
                                 <!-- Date input -->
                                 <label class="control-label" for="date">Tanggal Posting</label>
@@ -189,13 +196,14 @@
                           </div>
                       </div>
                       <li class="list-group-item d-flex px-3">
-                        <button class="btn btn-sm btn-accent ml-auto">
+                        <button type="submit" value="Save" class="btn btn-sm btn-accent ml-auto">
                           <i class="material-icons">file_copy</i> Publish</button>
                       </li>
                     </ul>
                   </div>
                 </div>
                 <!-- / Post Overview -->
+            {!! Form::close() !!}
               </div>
             </div>
           </div>

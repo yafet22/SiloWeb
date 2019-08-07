@@ -12,3 +12,9 @@
 */
 
 Route::get('/', 'DashboardController@index')->name('home');
+
+Route::get('/add-new-post', function () {
+    return view('add-new-post');
+})->name('new-post');
+
+Route::resource('Posting','PostingController');
