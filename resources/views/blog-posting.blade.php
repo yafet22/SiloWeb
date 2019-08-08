@@ -4,8 +4,6 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>Admin SELO</title>
-    <meta name="description" content="A high-quality &amp; free Bootstrap admin dashboard template pack that comes with lots of templates and components.">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
@@ -42,25 +40,25 @@
           <div class="nav-wrapper">
             <ul class="nav flex-column">
               <li class="nav-item">
-                <a class="nav-link " href="index.html">
+                <a class="nav-link " href="{{ url('/') }}">
                   <i class="material-icons">edit</i>
                   <span>Dashboard</span>
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" href="blog-posting.html">
+                <a class="nav-link active" href="{{ url('blog-posting') }}">
                   <i class="material-icons">vertical_split</i>
                   <span>Semua Postingan</span>
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link " href="add-new-post.html">
+                <a class="nav-link " href="{{ url('/add-new-post') }}">
                   <i class="material-icons">note_add</i>
                   <span>Tambah Postingan Baru</span>
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link " href="user-profile.html">
+                <a class="nav-link " href="{{ url('user-profile') }}">
                   <i class="material-icons">person</i>
                   <span>Profile Pengguna</span>
                 </a>

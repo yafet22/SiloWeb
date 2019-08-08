@@ -41,25 +41,25 @@
           <div class="nav-wrapper">
             <ul class="nav flex-column">
               <li class="nav-item">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="{{ url('/') }}">
                   <i class="material-icons">edit</i>
                   <span>Dashboard</span>
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link " href="blog-posting.html">
+                <a class="nav-link " href="{{ url('blog-posting') }}">
                   <i class="material-icons">vertical_split</i>
                   <span>Semua Postingan</span>
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" href="add-new-post.html">
+                <a class="nav-link active" href="{{ url('/add-new-post') }}">
                   <i class="material-icons">note_add</i>
                   <span>Tambah Postingan Baru</span>
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link " href="user-profile.html">
+                <a class="nav-link " href="{{ url('user-profile') }}">
                   <i class="material-icons">person</i>
                   <span>Profile Pengguna</span>
                 </a>
@@ -186,8 +186,10 @@
                     <ul class="list-group list-group-flush">
                       <div class="col-lg-12 col-md12">
                           <div class="card-height">
+                            <div class="view-img">
                             <img src="images/upload.jpg" alt="upload" class="image-upload" />
-                            {!!Form::file('photo',array('class'=>'text-center center-block file-upload'))!!}
+                            </div>
+                            {!!Form::file('photo',array('class'=>'text-center center-block file-upload', 'id'=>'upload'))!!}
                             <div class="form-group" style="padding:10px">
                                 <!-- Date input -->
                                 <label class="control-label" for="date">Tanggal Posting</label>
@@ -196,31 +198,8 @@
                           </div>
                       </div>
                       <li class="list-group-item d-flex px-3">
-                        <button type="submit" value="Save" class="btn btn-sm btn-accent ml-auto">
-                          <i class="material-icons">file_copy</i> Publish</button>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-                <!-- / Post Overview -->
-              <!-- Post Overview -->
-              <div class='card card-small mb-3'>
-                  <div class="card-header border-bottom">
-                    <h6 class="m-0">Upload Gambar</h6>
-                  </div>
-                  <div class='card-body p-0'>
-                    <ul class="list-group list-group-flush">
-                      <div class="col-lg-12 col-md12">
-                          <div class="card-height">
-                            <div class="preview">
-                            </div>
-                            
-                            <button id="triggerUpload" class="btn">Preview Image</button>
-                            <input type="file" id="filePicker" />
-                            <div class="fileName"></div>
-                            
-                      </div>
-                      <li class="list-group-item d-flex px-3">
+                        <button type="button" value="save" class="btn buttonImage btn-sm btn-outline-accent">
+                          <i class="material-icons">save</i>Upload Gambar</button>
                         <button type="submit" value="Save" class="btn btn-sm btn-accent ml-auto">
                           <i class="material-icons">file_copy</i> Publish</button>
                       </li>
@@ -269,6 +248,31 @@
 </html>
 
 <style>
+#upload {
+  display: none;
+}
+.buttonImage span {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  -webkit-transition: all 0.15s;
+  -webkit-backface-visibility: hidden;
+  -moz-transition: all 0.15s;
+  -moz-backface-visibility: hidden;
+  transition: all 0.15s;
+  backface-visibility: hidden;
+}
+
+.buttonImage:hover:after {
+  top: 0;
+}
+
+.buttonImage:hover span {
+  -webkit-transform: translateY(300%);
+  -moz-transform: translateY(300%);
+  -ms-transform: translateY(300%);
+  transform: translateY(300%);
+}
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800);
 
 .image-upload{
@@ -276,15 +280,6 @@
   width:250px;
   
 }
-body {
-  font-family: 'Open Sans', sans-serif;
-}
-
-.head {
-  font-size: 25px;
-  font-weight: 200;
-}
-
 .blue-btn:hover,
 .blue-btn:active,
 .blue-btn:focus,
@@ -298,110 +293,4 @@ body {
   outline: none !important;
   padding: 10px 20px;
 }
-
-.fileUpload {
-  position: relative;
-  overflow: hidden;
-  height: 43px;
-  margin-top: 0;
-}
-
-.fileUpload input.uploadlogo {
-  position: absolute;
-  top: 0;
-  right: 0;
-  margin: 0;
-  padding: 0;
-  font-size: 20px;
-  cursor: pointer;
-  opacity: 0;
-  filter: alpha(opacity=0);
-  width: 100%;
-  height: 42px;
-}
-
-section {
-  width: 95%;
-  max-width: 750px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-  padding: 3.5em .75em;
-  border: 1px solid #e8e8e8;
-  border-radius: 6px;
-  background: #fff;
-}
-
-.btn {
-  text-align: center;
-  padding: .5em .75em;
-  background: #3FBF7F;
-  background: linear-gradient(to right, #1CCEB0, #3FBF7F);
-  border: none;
-  font-weight: 300;
-  font-size: 1.25EM;
-  color: #fff;
-  border-radius: 4px;
-  transition: all 500ms;
-}
-.btn:hover {
-  border-radius: 12px;
-}
-
-input[type=file] {
-  width: 0;
-  height: 0;
-  overflow: hidden;
-  visibility: hidden;
-}
-
-.fileName {
-  padding-top: 10px;
-  font-weight: 300;
-}
-
-.preview {
-  position: relative;
-  width: 250px;
-  height: 250px;
-  background: #f2f2f2;
-  border-radius: 100%;
-  margin: 0 auto 25px auto;
-  overflow: hidden;
-  border: 8px solid #E0E0E0;
-}
-.preview img {
-  width: 250px;
-  height: 250px;
-  object-fit: contain;
-}
-.preview .loadingLogo {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin-left: -35px;
-  margin-top: -35px;
-  width: 70px;
-  height: 70px;
-  border: 5px solid #69CD9B;
-  border-top: 5px solid #2FDEC1;
-  border-radius: 100%;
-  animation: spin 500ms linear infinite;
-}
-
-@keyframes spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-body {
-  background: #f6f6f6;
-}
-
-
 </style>
