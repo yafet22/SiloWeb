@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>admin SELO</title>
+    <title>Admin SELO</title>
     <meta name="description" content="A high-quality &amp; free Bootstrap admin dashboard template pack that comes with lots of templates and components.">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
@@ -152,23 +152,29 @@
             </div>
             <!-- End Page Header -->
             <div class="row">
+              @foreach($postings as $posting)
               <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
                 <div class="card card-small card-post card-post--1">
-                  <div class="card-post__image" style="background-image: url('images/content/1.jpeg');">
+                  <div class="card-post__image" style="background-image: url('images/{{$posting->photo}}');">
+                    @if($posting->category=='Bencana Alam')
+                    <a href="#" class="card-post__category badge badge-pill badge-info">Bencana Alam</a>
+                    @elseif($posting->category=='Pertanian')
                     <a href="#" class="card-post__category badge badge-pill badge-dark">Pertanian</a>
+                    @endif
                     <div class="card-post__author d-flex">
                     </div>
                   </div>
                   <div class="card-body">
                     <h5 class="card-title">
-                      <a class="text-fiord-blue" href="#">Padi IR64 Semakin mahal</a>
+                      <a class="text-fiord-blue" href="#">{{ $posting->title }}</a>
                     </h5>
-                    <p class="card-text d-inline-block mb-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio quae iusto sit dolore perferendis architecto reprehenderit saepe voluptatibus.</p>
-                    <span class="text-muted">28 Juli 2019</span>
+                    <p class="card-text d-inline-block mb-3">{{$posting->description}}</p>
+                    <span class="text-muted">{{ $posting->created_at }}</span>
                   </div>
                 </div>
               </div>
-              <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+              @endforeach
+              <!-- <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
                 <div class="card card-small card-post card-post--1">
                   <div class="card-post__image" style="background-image: url('images/content/2.jpeg');">
                     <a href="#" class="card-post__category badge badge-pill badge-info">Bencana Alam</a>
@@ -215,7 +221,7 @@
                     <span class="text-muted">29 Juli 2019</span>
                   </div>
                 </div>
-              </div>
+              </div> -->
             </div>
           </div>
           <footer class="main-footer d-flex p-2 px-3 bg-white border-top">

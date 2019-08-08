@@ -13,7 +13,8 @@ class PostingController extends Controller
      */
     public function index()
     {
-      
+        $postings = Posting::all();
+        return view('blog-posting',compact('postings'));
     }
 
     /**

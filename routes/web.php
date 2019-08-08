@@ -18,3 +18,4 @@ Route::get('/add-new-post', function () {
 })->name('new-post');
 
 Route::resource('Posting','PostingController');
+Route::get('/blog-posting','PostingController@index');
