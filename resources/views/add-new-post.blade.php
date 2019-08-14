@@ -41,25 +41,25 @@
           <div class="nav-wrapper">
             <ul class="nav flex-column">
               <li class="nav-item">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="{{ url('/') }}">
                   <i class="material-icons">edit</i>
                   <span>Dashboard</span>
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link " href="blog-posting.html">
+                <a class="nav-link " href="{{ url('blog-posting') }}">
                   <i class="material-icons">vertical_split</i>
                   <span>Semua Postingan</span>
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" href="add-new-post.html">
+                <a class="nav-link active" href="{{ url('/add-new-post') }}">
                   <i class="material-icons">note_add</i>
                   <span>Tambah Postingan Baru</span>
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link " href="user-profile.html">
+                <a class="nav-link " href="{{ url('user-profile') }}">
                   <i class="material-icons">person</i>
                   <span>Profile Pengguna</span>
                 </a>
@@ -186,8 +186,10 @@
                     <ul class="list-group list-group-flush">
                       <div class="col-lg-12 col-md12">
                           <div class="card-height">
+                            <div class="view-img">
                             <img src="images/upload.jpg" alt="upload" class="image-upload" />
-                            {!!Form::file('photo',array('class'=>'text-center center-block file-upload'))!!}
+                            </div>
+                            {!!Form::file('photo',array('class'=>'text-center center-block file-upload', 'id'=>'upload'))!!}
                             <div class="form-group" style="padding:10px">
                                 <!-- Date input -->
                                 <label class="control-label" for="date">Tanggal Posting</label>
@@ -196,6 +198,8 @@
                           </div>
                       </div>
                       <li class="list-group-item d-flex px-3">
+                        <button type="button" value="save" class="btn buttonImage btn-sm btn-outline-accent">
+                          <i class="material-icons">save</i>Upload Gambar</button>
                         <button type="submit" value="Save" class="btn btn-sm btn-accent ml-auto">
                           <i class="material-icons">file_copy</i> Publish</button>
                       </li>
@@ -238,11 +242,37 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/quill/1.3.6/quill.min.js"></script>
     <script src="scripts/app/text-editor.js"></script>
     <script src="scripts/dashboard-silo.js"></script>
+    <script src="scripts/script.js"></script>
 
   </body>
 </html>
 
 <style>
+#upload {
+  display: none;
+}
+.buttonImage span {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  -webkit-transition: all 0.15s;
+  -webkit-backface-visibility: hidden;
+  -moz-transition: all 0.15s;
+  -moz-backface-visibility: hidden;
+  transition: all 0.15s;
+  backface-visibility: hidden;
+}
+
+.buttonImage:hover:after {
+  top: 0;
+}
+
+.buttonImage:hover span {
+  -webkit-transform: translateY(300%);
+  -moz-transform: translateY(300%);
+  -ms-transform: translateY(300%);
+  transform: translateY(300%);
+}
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800);
 
 .image-upload{
@@ -250,15 +280,6 @@
   width:250px;
   
 }
-body {
-  font-family: 'Open Sans', sans-serif;
-}
-
-.head {
-  font-size: 25px;
-  font-weight: 200;
-}
-
 .blue-btn:hover,
 .blue-btn:active,
 .blue-btn:focus,
@@ -272,33 +293,4 @@ body {
   outline: none !important;
   padding: 10px 20px;
 }
-
-.fileUpload {
-  position: relative;
-  overflow: hidden;
-  height: 43px;
-  margin-top: 0;
-}
-
-.fileUpload input.uploadlogo {
-  position: absolute;
-  top: 0;
-  right: 0;
-  margin: 0;
-  padding: 0;
-  font-size: 20px;
-  cursor: pointer;
-  opacity: 0;
-  filter: alpha(opacity=0);
-  width: 100%;
-  height: 42px;
-}
-
-/*Chrome fix*/
-input::-webkit-file-upload-button {
-  cursor: pointer !important;
-  height: 42px;
-  width: 100%;
-}
-
 </style>
