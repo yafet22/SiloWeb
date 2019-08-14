@@ -26,5 +26,9 @@ Route::post('verify-user','SmsController@verifyContact');
 // Route::get('/posting/{id}','postingController@destroy');
 
 Route::resource('user','UserRestController');
+Route::post('login','UserRestController@mobileauthenticate');
+
 Route::resource('posting','PostingRestController');
+
+Route::resource('comment','CommentRestController');
 

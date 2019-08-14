@@ -28,15 +28,19 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $hidden = [
-        'password',
-    ];
+    // protected $hidden = [
+    //     'password',
+    // ];
 
     /**
      * The attributes that should be cast to native types.
      *
      * @var array
      */
+
+    public function comments(){
+        return $this->hasMany('App\Comment','id_user');
+    }
 
     public function store($request)
     {

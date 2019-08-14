@@ -15,4 +15,8 @@ class Posting extends Model
                             'description',
                             'category'
                         ];
+
+    public function comments(){
+        return $this->hasMany('App\Comment','id');
+    }
 }

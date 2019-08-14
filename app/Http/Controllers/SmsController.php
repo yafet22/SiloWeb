@@ -47,24 +47,46 @@ class SmsController extends Controller
 
     public function sendSms($request,$result)
     {
-        $accountSid = config('app.twilio')['TWILIO_ACCOUNT_SID'];
-        $authToken = config('app.twilio')['TWILIO_AUTH_TOKEN'];
-        try
-        {
-            $client = new Client(['auth' => [$accountSid, $authToken]]);
-            $result2 = $client->post('https://api.twilio.com/2010-04-01/Accounts/'.$accountSid.'/Messages.json',
-            ['form_params' => [
-            'Body' => 'CODE: '. $request->code, //set message body
-            'To' => $request->phone_number,
-            'From' => '+12056199597' //we get this number from twilio
-            ]]);
+        // $accountSid = config('app.twilio')['TWILIO_ACCOUNT_SID'];
+        // $authToken = config('app.twilio')['TWILIO_AUTH_TOKEN'];
+        // try
+        // {
+        //     $client = new Client(['auth' => [$accountSid, $authToken]]);
+        //     $result2 = $client->post('https://api.twilio.com/2010-04-01/Accounts/'.$accountSid.'/Messages.json',
+        //     ['form_params' => [
+        //     'Body' => 'CODE: '. $request->code, //set message body
+        //     'To' => $request->phone_number,
+        //     'From' => '+12056199597' //we get this number from twilio
+        //     ]]);
             
-            return $result;
-        }
-        catch (Exception $e)
-        {
-            echo "Error: " . $e->getMessage();
-        }
+        //     return $result;
+        // }
+        // catch (Exception $e)
+        // {
+        //     echo "Error: " . $e->getMessage();
+        // }
+
+        $userkey = "gtlq0f";
+        $passkey = "3fdc9dasia";
+        $telepon = $request->phone_number;
+        $otp = $request->code;
+        // $telepon = "081234567890";
+        $message = "Terima Kasih telah mendaftar di SILO, Masukan Kode Verifikasi $otp .";
+        $url = "https://reguler.zenziva.net/apps/smsapi.php";
+        $curlHandle = curl_init();
+        curl_setopt($curlHandle, CURLOPT_URL, $url);
+        curl_setopt($curlHandle, CURLOPT_POSTFIELDS, 'userkey='.$userkey.'&passkey='.$passkey.'&nohp='.$telepon.'&pesan='.urlencode($message));
+        curl_setopt($curlHandle, CURLOPT_HEADER, 0);
+        curl_setopt($curlHandle, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($curlHandle, CURLOPT_SSL_VERIFYHOST, 2);
+        curl_setopt($curlHandle, CURLOPT_SSL_VERIFYPEER, 0);
+        curl_setopt($curlHandle, CURLOPT_TIMEOUT,30);
+        curl_setopt($curlHandle, CURLOPT_POST, 1);
+        $results = curl_exec($curlHandle);
+        curl_close($curlHandle);
+        
+        
+        return $result;
     }
 
 }

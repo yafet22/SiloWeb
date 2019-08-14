@@ -1,22 +1,17 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Comment;
 use Illuminate\Http\Request;
-use App\User;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use App\Transformers\UserTransformer;
+use App\Transformers\CommentTransformer;
 
-use App\Exceptions\InvalidTokenException;
-use App\Exceptions\InvalidCredentialException;
-
-class UserRestController extends RestController
+class CommentRestController extends RestController
 {
-    protected $transformer = UserTransformer::class;
-
+    protected $transformer = CommentTransformer::class;
     /**
      * Display a listing of the resource.
      *
@@ -24,9 +19,9 @@ class UserRestController extends RestController
      */
     public function index()
     {
-        $users = User::all();
-        $response = $this->generateCollection($users);
-        return $this->sendResponse($response);
+        $comments = Comment::all();
+        $response = $this->generateCollection($comments);
+        return $this->sendResponse($response); 
     }
 
     /**
@@ -48,23 +43,21 @@ class UserRestController extends RestController
     public function store(Request $request)
     {
         $this->validate($request,[
-            'name' => 'required',
-            'password' => 'required',
-            'phone_number' => 'required',
+            'content' => 'required',
+            'id_user' => 'required',
+            'id_posting' => 'required',
         ]);   
 
         try {
 
-                $users = new User;
+                $comment = new Comment;
 
-                $users->name=$request->get('name');
-                $users->password=$request->get('password');
-                $users->phone_number=$request->get('phone_number');
-                $users->status="pending";
-                $users->code=rand(1000, 9999);
-                $users->save();
+                $comment->content=$request->get('content');
+                $comment->id_user=$request->get('id_user');
+                $comment->id_posting=$request->get('id_posting');
+                $comment->save();
 
-                $response = $this->generateItem($users);
+                $response = $this->generateItem($comment);
 
                 return $this->sendResponse($response, 201);
            
@@ -83,11 +76,11 @@ class UserRestController extends RestController
     public function show($id)
     {
         try {
-            $users=User::find($id);
-            $response = $this->generateItem($users);
+            $comment=Comment::find($id);
+            $response = $this->generateItem($comment);
             return $this->sendResponse($response);
         } catch (ModelNotFoundException $e) {
-            return $this->sendNotFoundResponse('user_not_found');
+            return $this->sendNotFoundResponse('comment_not_found');
         } catch (\Exception $e) {
             return $this->sendIseResponse($e->getMessage());
         }
@@ -115,20 +108,19 @@ class UserRestController extends RestController
     {
         try {
 
-            $users = User::find($id);
+            $comment = Comment::find($id);
             
-            $users->name=$request->get('name');
-            $users->password=$request->get('password');
-            $users->phone_number=$request->get('phone_number');
-            $users->status=$request->get('status');
-            $users->save();
+            $comment->content=$request->get('content');
+            $comment->id_user=$request->get('id_user');
+            $comment->id_posting=$request->get('id_posting');
+            $comment->save();
 
-            $response = $this->generateItem($users);
+            $response = $this->generateItem($comment);
 
             return $this->sendResponse($response, 201);
 
         }catch (ModelNotFoundException $e) {
-            return $this->sendNotFoundResponse('user_not_found');
+            return $this->sendNotFoundResponse('comment_not_found');
         }
         catch (\Exception $e) {
             return $this->sendIseResponse($e->getMessage());
@@ -144,43 +136,12 @@ class UserRestController extends RestController
     public function destroy($id)
     {
         try {
-            $users=User::find($id);
-            $users->delete();
+            $comment=Comment::find($id);
+            $comment->delete();
             return response()->json('Success',200);
         } catch (ModelNotFoundException $e) {
-            return $this->sendNotFoundResponse('user_not_found');
+            return $this->sendNotFoundResponse('comment_not_found');
         } catch (\Exception $e) {
-            return $this->sendIseResponse($e->getMessage());
-        }
-    }
-
-    public function mobileauthenticate(Request $request)
-    {
-        try {
-            $user = $this->validateUser($request->get('phone_number'), $request->get('password'));
-
-            $response = $this->generateItem($user,UserTransformer::class);
-
-            return $this->sendResponse($response, 201);
-
-        } catch (InvalidCredentialExcpetion $e) {
-            return $this->sendNotAuthorizeResponse($e->getMessage());
-        } catch (\Exception $e) {
-            throw $e;
-        }
-    }
-
-    public function validateUser($phone_number,$password)
-    {
-        try{
-            $user = User::where('phone_number',$phone_number)->firstOrFail();
-
-            if($user->password!=$password){
-                throw new InvalidCredentialException();
-            }
-
-            return $user;
-        } catch(ModelNotFoundException $e) {
             return $this->sendIseResponse($e->getMessage());
         }
     }
