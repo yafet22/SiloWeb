@@ -152,7 +152,7 @@
             <div class="row">
               @foreach($postings as $posting)
               <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
-                <div class="card card-small card-post card-post--1">
+                <div class="card card-small card-post card-post--1" id="card-truncate">
                   <div class="card-post__image" style="background-image: url('images/{{$posting->photo}}');">
                     @if($posting->category=='Bencana Alam')
                     <a href="#" class="card-post__category badge badge-pill badge-info">Bencana Alam</a>
@@ -166,7 +166,7 @@
                     <h5 class="card-title">
                       <a class="text-fiord-blue" href="#">{{ $posting->title }}</a>
                     </h5>
-                    <p class="card-text d-inline-block mb-3">{{$posting->description}}</p>
+                    <p class="card-text d-inline-block mb-3">{{$posting->description}}</p> <br>
                     <span class="text-muted">{{ $posting->created_at }}</span>
                   </div>
                 </div>
@@ -252,3 +252,12 @@
     </div>
   </body>
 </html>
+
+<style>
+#card-truncate{
+  min-width:200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+</style>
