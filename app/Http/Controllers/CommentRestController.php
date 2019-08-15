@@ -86,20 +86,6 @@ class CommentRestController extends RestController
         }
     }
 
-    public function showbyPost($id)
-    {
-        try {
-            $comments=Comment::where('id_posting','=',
-            $id)->get();
-            $response = $this->generateCollection($comments);
-            return $this->sendResponse($response); 
-        } catch (ModelNotFoundException $e) {
-            return $this->sendNotFoundResponse('comment_not_found');
-        } catch (\Exception $e) {
-            return $this->sendIseResponse($e->getMessage());
-        }
-    }
-
     /**
      * Show the form for editing the specified resource.
      *

@@ -15,7 +15,6 @@ class PostingTransformer extends TransformerAbstract
     public function transform(Posting $posting)
     {
         return [
-            'id' => $posting->id,
             'title' => $posting->title,
             'photo' => $posting->photo,
             'description' => $posting->description,

@@ -96,34 +96,6 @@ class PostingRestController extends RestController
         }
     }
 
-    public function showBencana()
-    {
-        try {
-            $postings=Posting::where('category','=',
-            'Bencana Alam')->get();
-            $response = $this->generateCollection($postings);
-            return $this->sendResponse($response); 
-        } catch (ModelNotFoundException $e) {
-            return $this->sendNotFoundResponse('posting_not_found');
-        } catch (\Exception $e) {
-            return $this->sendIseResponse($e->getMessage());
-        }
-    }
-
-    public function showPertanian()
-    {
-        try {
-            $postings=Posting::where('category','=',
-            'Pertanian')->get();
-            $response = $this->generateCollection($postings);
-            return $this->sendResponse($response); 
-        } catch (ModelNotFoundException $e) {
-            return $this->sendNotFoundResponse('posting_not_found');
-        } catch (\Exception $e) {
-            return $this->sendIseResponse($e->getMessage());
-        }
-    }
-
     /**
      * Show the form for editing the specified resource.
      *
