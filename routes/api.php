@@ -24,6 +24,8 @@ Route::resource('user','UserRestController');
 Route::post('login','UserRestController@mobileauthenticate');
 
 Route::resource('posting','PostingRestController');
+Route::get('bencana-alam','PostingRestController@showBencana');
+Route::get('pertanian','PostingRestController@showPertanian');
 
 Route::resource('comment','CommentRestController');
-
+Route::get('comment-post/{id}','CommentRestController@showbyPost');
