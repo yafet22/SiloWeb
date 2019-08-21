@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Admin SELO</title>
+    <title>admin SELO</title>
     <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
@@ -14,12 +14,13 @@
   <body class="h-100">
     <div class="container-fluid">
       <div class="row">
+        <!-- Main Sidebar -->
         <aside class="main-sidebar col-12 col-md-3 col-lg-2 px-0">
           <div class="main-navbar">
             <nav class="navbar align-items-stretch navbar-light bg-white flex-md-nowrap border-bottom p-0">
               <a class="navbar-brand w-100 mr-0" href="#" style="line-height: 25px;">
                 <div class="d-table m-auto">
-                  <img id="main-logo" class="d-inline-block align-top mr-1" style="max-width: 25px;" src="images/logo.png" alt="dashboard Silo">
+                  <img id="main-logo" class="d-inline-block align-top mr-1" style="max-width: 25px;" src="images/logo.png" alt="Silo Dashboard">
                   <span class="d-none d-md-inline ml-1">Admin Selo</span>
                 </div>
               </a>
@@ -40,25 +41,25 @@
           <div class="nav-wrapper">
             <ul class="nav flex-column">
               <li class="nav-item">
-                <a class="nav-link " href="{{ url('/') }}">
+                <a class="nav-link" href="index.html">
                   <i class="material-icons">edit</i>
                   <span>Dashboard</span>
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" href="{{ url('blog-posting') }}">
+                <a class="nav-link " href="blog-posting.html">
                   <i class="material-icons">vertical_split</i>
                   <span>Semua Postingan</span>
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link " href="{{ url('/add-new-post') }}">
+                <a class="nav-link " href="add-new-post.html">
                   <i class="material-icons">note_add</i>
                   <span>Tambah Postingan Baru</span>
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link " href="{{ url('user-profile') }}">
+                <a class="nav-link active" href="user-profile.html">
                   <i class="material-icons">person</i>
                   <span>Profile Pengguna</span>
                 </a>
@@ -140,87 +141,72 @@
             </nav>
           </div>
           <!-- / .main-navbar -->
+          <div class="alert alert-success alert-dismissible fade show mb-0" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+            <i class="fa fa-check mx-2"></i>
+            <strong>Selamat</strong>Profile mu berhasil diperbaharui</div>
           <div class="main-content-container container-fluid px-4">
             <!-- Page Header -->
             <div class="page-header row no-gutters py-4">
               <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
-                <span class="text-uppercase page-subtitle">Postingan</span>
-                <h3 class="page-title">Semua Postingan</h3>
+                <span class="text-uppercase page-subtitle">Overview</span>
+                <h3 class="page-title">Profile Pengguna</h3>
               </div>
             </div>
             <!-- End Page Header -->
+            <!-- Default Light Table -->
             <div class="row">
-              @foreach($postings as $posting)
-              <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
-                <div class="card card-small card-post card-post--1" id="card-truncate">
-                  <div class="card-post__image" style="background-image: url('images/{{$posting->photo}}');">
-                    @if($posting->category=='Bencana Alam')
-                    <a href="#" class="card-post__category badge badge-pill badge-info">Bencana Alam</a>
-                    @elseif($posting->category=='Pertanian')
-                    <a href="#" class="card-post__category badge badge-pill badge-dark">Pertanian</a>
-                    @endif
-                    <div class="card-post__author d-flex">
-                    </div>
-                  </div>
-                  <div class="card-body">
-                    <h5 class="card-title">
-                      <a class="text-fiord-blue" href="{{ route('detail-posting') }}">{{ $posting->title }}</a>
-                    </h5>
-                    <p class="card-text d-inline-block mb-3">{{$posting->description}}</p> <br>
-                    <span class="text-muted">{{ $posting->created_at }}</span>
+              <div class="col-lg-4">
+                <div class="card card-small mb-4 pt-3">
+                  <div class="card-header border-bottom text-center">
+                    <div class="mb-3 mx-auto">
+                      <img class="rounded-circle" src="images/yuri.png" alt="User Avatar" width="110"> </div>
+                    <h4 class="mb-0">Yuri Chandra</h4>
+                    <span class="text-muted d-block mb-2">Administrator</span>
                   </div>
                 </div>
               </div>
-              @endforeach
-              <!-- <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
-                <div class="card card-small card-post card-post--1">
-                  <div class="card-post__image" style="background-image: url('images/content/2.jpeg');">
-                    <a href="#" class="card-post__category badge badge-pill badge-info">Bencana Alam</a>
-                    <div class="card-post__author d-flex">
-                    </div>
+              <div class="col-lg-8">
+                <div class="card card-small mb-4">
+                  <div class="card-header border-bottom">
+                    <h6 class="m-0">Detail Akun</h6>
                   </div>
-                  <div class="card-body">
-                    <h5 class="card-title">
-                      <a class="text-fiord-blue" href="#">Gunung Merapi Meletus</a>
-                    </h5>
-                    <p class="card-text d-inline-block mb-3">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Est voluptas corporis excepturi voluptatibus velit culpa fuga vitae quisquam!</p>
-                    <span class="text-muted">29 Juli 2019</span>
-                  </div>
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item p-3">
+                      <div class="row">
+                        <div class="col">
+                          <form>
+                            <div class="form-row">
+                              <div class="form-group col-md-6">
+                                <label for="feFirstName">Nama Depan</label>
+                                <input type="text" class="form-control" id="feFirstName" placeholder="First Name" value="Yuri"> </div>
+                              <div class="form-group col-md-6">
+                                <label for="feLastName">Nama Belakang</label>
+                                <input type="text" class="form-control" id="feLastName" placeholder="Last Name" value="Chandra"> </div>
+                            </div>
+                            <div class="form-row">
+                              <div class="form-group col-md-12">
+                                <label for="feEmailAddress">No HP</label>
+                                <input type="email" class="form-control" id="feEmailAddress" placeholder="Email" value="081254026142"> </div>
+                              <div class="form-group col-md-6">
+                                <label for="fePassword">Password Lama</label>
+                                <input type="password" class="form-control" id="fePassword" placeholder="Password"> </div>
+                                <div class="form-group col-md-6">
+                                  <label for="fePassword">Password Baru</label>
+                                  <input type="password" class="form-control" id="fePassword" placeholder="Password"> </div>
+                            </div>
+                            <button type="submit" class="btn btn-accent">Perbaharui Akun</button>
+                          </form>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
                 </div>
               </div>
-              <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
-                <div class="card card-small card-post card-post--1">
-                  <div class="card-post__image" style="background-image: url('images/content/3.jpeg');">
-                    <a href="#" class="card-post__category badge badge-pill badge-info">Bencana Alam</a>
-                    <div class="card-post__author d-flex">
-                    </div>
-                  </div>
-                  <div class="card-body">
-                    <h5 class="card-title">
-                      <a class="text-fiord-blue" href="#">Lahar Dingi Yang panas</a>
-                    </h5>
-                    <p class="card-text d-inline-block mb-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore, molestiae fuga doloremque illo architecto illum ducimus ab natus?</p>
-                    <span class="text-muted">29 Juli 2019</span>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
-                <div class="card card-small card-post card-post--1">
-                  <div class="card-post__image" style="background-image: url('images/content/4.jpeg');">
-                    <a href="#" class="card-post__category badge badge-pill badge-info">Bencana Alam</a>
-                    <div class="card-post__author d-flex">
-                    </div>
-                  </div>
-                  <div class="card-body">
-                    <h5 class="card-title">
-                      <a class="text-fiord-blue" href="#">Letusan Merapi sampai ke bu RT</a>
-                    </h5>
-                    <p class="card-text d-inline-block mb-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi non, aspernatur nam aperiam et quo consequatur amet velit?</p>
-                    <span class="text-muted">29 Juli 2019</span>
-                  </div>
-                </div>
-              </div> -->
             </div>
+            <!-- End Default Light Table -->
           </div>
           <footer class="main-footer d-flex p-2 px-3 bg-white border-top">
             <ul class="nav">
@@ -240,24 +226,16 @@
                 <a class="nav-link" href="#">Blog</a>
               </li>
             </ul>
-            <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/Sharrre/2.0.1/jquery.sharrre.min.js"></script>
-            <script src="scripts/dashboard-silo.js"></script>
+            
           </footer>
         </main>
       </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Sharrre/2.0.1/jquery.sharrre.min.js"></script>
+    <script src="scripts/dashboard-silo.js"></script>
   </body>
 </html>
-
-<style>
-#card-truncate{
-  min-width:200px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-</style>
