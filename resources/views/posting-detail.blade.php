@@ -3,14 +3,14 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>admin SELO</title>
+    <title>Admin SELO</title>
     <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" id="main-stylesheet" data-version="1.1.0" href="styles/dashboard-silo.css">
     <link rel="stylesheet" href="styles/extras.1.1.0.min.css">
     <script async defer src="https://buttons.github.io/buttons.js"></script>
-  </head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/quill/1.3.6/quill.snow.css"> </head>
   <body class="h-100">
     <div class="container-fluid">
       <div class="row">
@@ -41,25 +41,25 @@
           <div class="nav-wrapper">
             <ul class="nav flex-column">
               <li class="nav-item">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="{{ url('/') }}">
                   <i class="material-icons">edit</i>
                   <span>Dashboard</span>
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link " href="blog-posting.html">
+                <a class="nav-link active" href="{{ url('blog-posting') }}">
                   <i class="material-icons">vertical_split</i>
                   <span>Semua Postingan</span>
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link " href="add-new-post.html">
+                <a class="nav-link" href="{{ url('/add-new-post') }}">
                   <i class="material-icons">note_add</i>
                   <span>Tambah Postingan Baru</span>
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" href="user-profile.html">
+                <a class="nav-link " href="{{ url('user-profile') }}">
                   <i class="material-icons">person</i>
                   <span>Profile Pengguna</span>
                 </a>
@@ -141,72 +141,75 @@
             </nav>
           </div>
           <!-- / .main-navbar -->
-          <div class="alert alert-success alert-dismissible fade show mb-0" role="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-              <span aria-hidden="true">×</span>
-            </button>
-            <i class="fa fa-check mx-2"></i>
-            <strong>Selamat</strong>Profile mu berhasil diperbaharui</div>
           <div class="main-content-container container-fluid px-4">
             <!-- Page Header -->
             <div class="page-header row no-gutters py-4">
               <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
-                <span class="text-uppercase page-subtitle">Overview</span>
-                <h3 class="page-title">Profile Pengguna</h3>
+                <span class="text-uppercase page-subtitle">Semua postingan</span>
+                <h3 class="page-title">Bencana Alam</h3>
               </div>
             </div>
             <!-- End Page Header -->
-            <!-- Default Light Table -->
+            {!!Form::open(array('route' => 'Posting.store','method'=>'POST','enctype'=>'multipart/form-data','id'=>'identifier'))!!}
             <div class="row">
-              <div class="col-lg-4">
-                <div class="card card-small mb-4 pt-3">
-                  <div class="card-header border-bottom text-center">
-                    <div class="mb-3 mx-auto">
-                      <img class="rounded-circle" src="images/yuri.png" alt="User Avatar" width="110"> </div>
-                    <h4 class="mb-0">Yuri Chandra</h4>
-                    <span class="text-muted d-block mb-2">Administrator</span>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-8">
-                <div class="card card-small mb-4">
-                  <div class="card-header border-bottom">
-                    <h6 class="m-0">Detail Akun</h6>
-                  </div>
-                  <ul class="list-group list-group-flush">
-                    <li class="list-group-item p-3">
-                      <div class="row">
-                        <div class="col">
-                          <form>
-                            <div class="form-row">
-                              <div class="form-group col-md-6">
-                                <label for="feFirstName">Nama Depan</label>
-                                <input type="text" class="form-control" id="feFirstName" placeholder="First Name" value="Yuri"> </div>
-                              <div class="form-group col-md-6">
-                                <label for="feLastName">Nama Belakang</label>
-                                <input type="text" class="form-control" id="feLastName" placeholder="Last Name" value="Chandra"> </div>
-                            </div>
-                            <div class="form-row">
-                              <div class="form-group col-md-12">
-                                <label for="feEmailAddress">No HP</label>
-                                <input type="email" class="form-control" id="feEmailAddress" placeholder="Email" value="081254026142"> </div>
-                              <div class="form-group col-md-6">
-                                <label for="fePassword">Password Lama</label>
-                                <input type="password" class="form-control" id="fePassword" placeholder="Password"> </div>
-                                <div class="form-group col-md-6">
-                                  <label for="fePassword">Password Baru</label>
-                                  <input type="password" class="form-control" id="fePassword" placeholder="Password"> </div>
-                            </div>
-                            <button type="submit" class="btn btn-accent">Perbaharui Akun</button>
-                          </form>
-                        </div>
+              <div class="col-lg-9 col-md-12">
+                <!-- Add New Post Form -->
+                <div class="card card-small mb-3">
+                  <div class="card-body">
+                    <!-- <form class="add-new-post"> -->
+                      <!-- <input class="form-control form-control-lg mb-3" type="text" placeholder="judul"> -->
+                      {!!Form::text('title',null,array('placeholder'=>'Judul','class'=>'form-control form-control-lg mb-3','id'=>'inputJudul'))!!}  
+                      <div class="form-group">
+                        <!-- <select class="formcomposer require "laravelcollective/html":"^5.8.0"-control">
+                          <option selected>Pilih Kategory</option>
+                          <option>Bencana Alam</option>
+                          <option>Pertanian</option>
+                        </select> -->
+                        {!!Form::select('category', array('Bencana Alam' => 'Bencana Alam', 'Pertanian' => 'Pertanian'),'Bencana Alam',array('class'=>'form-control','id'=>'inputKategori'))!!}
                       </div>
-                    </li>
-                  </ul>
+                      <!-- <div id="editor-container" class="add-new-post__editor mb-1"></div> -->
+                      <!-- <textarea name="descrption" style="display:none" id="hiddenArea"></textarea> -->
+                      {!!Form::textarea('description',null,array('placeholder'
+                                        =>'Deskripsi','class'=>'form-control','rows'=>'18','id'=>'hiddenArea'))!!}  
+                    <!-- </form> -->
+                  </div>
                 </div>
+                <!-- / Add New Post Form -->
+              </div>
+              <div class="col-lg-3 col-md-12">
+                <!-- Post Overview -->
+                <div class='card card-small mb-3'>
+                  <div class="card-header border-bottom">
+                    <h6 class="m-0">Upload Gambar</h6>
+                  </div>
+                  <div class='card-body p-0'>
+                    <ul class="list-group list-group-flush">
+                      <div class="col-lg-12 col-md12">
+                          <div class="card-height">
+                            <div class="view-img">
+                            <img src="images/upload.jpg" alt="upload" class="image-upload" />
+                            </div>
+                            {!!Form::file('photo',array('class'=>'text-center center-block file-upload', 'id'=>'upload'))!!}
+                            <div class="form-group" style="padding:10px">
+                                <!-- Date input -->
+                                <label class="control-label" for="date">Tanggal Posting</label>
+                                <input class="form-control" id="date" name="date" placeholder="DD/MM/YYYY" type="date" />
+                              </div>
+                          </div>
+                      </div>
+                      <li class="list-group-item d-flex px-3">
+                        <button type="button" value="save" class="btn buttonImage btn-sm btn-outline-accent">
+                          <i class="material-icons">save</i>Upload Gambar</button>
+                        <button type="submit" value="Save" class="btn btn-sm btn-accent ml-auto">
+                          <i class="material-icons">file_copy</i> Publish</button>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <!-- / Post Overview -->
+            {!! Form::close() !!}
               </div>
             </div>
-            <!-- End Default Light Table -->
           </div>
           <footer class="main-footer d-flex p-2 px-3 bg-white border-top">
             <ul class="nav">
@@ -236,6 +239,58 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Sharrre/2.0.1/jquery.sharrre.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/quill/1.3.6/quill.min.js"></script>
+    <script src="scripts/app/text-editor.js"></script>
     <script src="scripts/dashboard-silo.js"></script>
+    <script src="scripts/script.js"></script>
+
   </body>
 </html>
+
+<style>
+#upload {
+  display: none;
+}
+.buttonImage span {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  -webkit-transition: all 0.15s;
+  -webkit-backface-visibility: hidden;
+  -moz-transition: all 0.15s;
+  -moz-backface-visibility: hidden;
+  transition: all 0.15s;
+  backface-visibility: hidden;
+}
+
+.buttonImage:hover:after {
+  top: 0;
+}
+
+.buttonImage:hover span {
+  -webkit-transform: translateY(300%);
+  -moz-transform: translateY(300%);
+  -ms-transform: translateY(300%);
+  transform: translateY(300%);
+}
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800);
+
+.image-upload{
+  padding: 10px;
+  width:250px;
+  
+}
+.blue-btn:hover,
+.blue-btn:active,
+.blue-btn:focus,
+.blue-btn {
+  background: transparent;
+  border: solid 1px #27a9e0;
+  border-radius: 3px;
+  color: #27a9e0;
+  font-size: 16px;
+  margin-bottom: 20px;
+  outline: none !important;
+  padding: 10px 20px;
+}
+</style>
