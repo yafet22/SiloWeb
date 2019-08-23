@@ -10,16 +10,17 @@
     <link rel="stylesheet" id="main-stylesheet" data-version="1.1.0" href="styles/dashboard-silo.css">
     <link rel="stylesheet" href="styles/extras.1.1.0.min.css">
     <script async defer src="https://buttons.github.io/buttons.js"></script>
-  </head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/quill/1.3.6/quill.snow.css"> </head>
   <body class="h-100">
     <div class="container-fluid">
       <div class="row">
+        <!-- Main Sidebar -->
         <aside class="main-sidebar col-12 col-md-3 col-lg-2 px-0">
           <div class="main-navbar">
             <nav class="navbar align-items-stretch navbar-light bg-white flex-md-nowrap border-bottom p-0">
               <a class="navbar-brand w-100 mr-0" href="#" style="line-height: 25px;">
                 <div class="d-table m-auto">
-                  <img id="main-logo" class="d-inline-block align-top mr-1" style="max-width: 25px;" src="images/logo.png" alt="dashboard Silo">
+                  <img id="main-logo" class="d-inline-block align-top mr-1" style="max-width: 25px;" src="images/logo.png" alt="Silo Dashboard">
                   <span class="d-none d-md-inline ml-1">Admin Selo</span>
                 </div>
               </a>
@@ -40,7 +41,7 @@
           <div class="nav-wrapper">
             <ul class="nav flex-column">
               <li class="nav-item">
-                <a class="nav-link " href="{{ url('/') }}">
+                <a class="nav-link" href="{{ url('/') }}">
                   <i class="material-icons">edit</i>
                   <span>Dashboard</span>
                 </a>
@@ -52,7 +53,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link " href="{{ url('/add-new-post') }}">
+                <a class="nav-link" href="{{ url('/add-new-post') }}">
                   <i class="material-icons">note_add</i>
                   <span>Tambah Postingan Baru</span>
                 </a>
@@ -144,82 +145,70 @@
             <!-- Page Header -->
             <div class="page-header row no-gutters py-4">
               <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
-                <span class="text-uppercase page-subtitle">Postingan</span>
-                <h3 class="page-title">Semua Postingan</h3>
+                <span class="text-uppercase page-subtitle">Semua postingan</span>
+                <h3 class="page-title">Bencana Alam</h3>
               </div>
             </div>
             <!-- End Page Header -->
+            {!!Form::open(array('route' => 'Posting.store','method'=>'POST','enctype'=>'multipart/form-data','id'=>'identifier'))!!}
             <div class="row">
-              @foreach($postings as $posting)
-              <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
-                <div class="card card-small card-post card-post--1" id="card-truncate">
-                  <div class="card-post__image" style="background-image: url('images/{{$posting->photo}}');">
-                    @if($posting->category=='Bencana Alam')
-                    <a href="#" class="card-post__category badge badge-pill badge-info">Bencana Alam</a>
-                    @elseif($posting->category=='Pertanian')
-                    <a href="#" class="card-post__category badge badge-pill badge-dark">Pertanian</a>
-                    @endif
-                    <div class="card-post__author d-flex">
-                    </div>
-                  </div>
+              <div class="col-lg-9 col-md-12">
+                <!-- Add New Post Form -->
+                <div class="card card-small mb-3">
                   <div class="card-body">
-                    <h5 class="card-title">
-                      <a class="text-fiord-blue" href="{{ route('detail-posting') }}">{{ $posting->title }}</a>
-                    </h5>
-                    <p class="card-text d-inline-block mb-3">{{$posting->description}}</p> <br>
-                    <span class="text-muted">{{ $posting->created_at }}</span>
+                    <!-- <form class="add-new-post"> -->
+                      <!-- <input class="form-control form-control-lg mb-3" type="text" placeholder="judul"> -->
+                      {!!Form::text('title',null,array('placeholder'=>'Judul','class'=>'form-control form-control-lg mb-3','id'=>'inputJudul'))!!}  
+                      <div class="form-group">
+                        <!-- <select class="formcomposer require "laravelcollective/html":"^5.8.0"-control">
+                          <option selected>Pilih Kategory</option>
+                          <option>Bencana Alam</option>
+                          <option>Pertanian</option>
+                        </select> -->
+                        {!!Form::select('category', array('Bencana Alam' => 'Bencana Alam', 'Pertanian' => 'Pertanian'),'Bencana Alam',array('class'=>'form-control','id'=>'inputKategori'))!!}
+                      </div>
+                      <!-- <div id="editor-container" class="add-new-post__editor mb-1"></div> -->
+                      <!-- <textarea name="descrption" style="display:none" id="hiddenArea"></textarea> -->
+                      {!!Form::textarea('description',null,array('placeholder'
+                                        =>'Deskripsi','class'=>'form-control','rows'=>'18','id'=>'hiddenArea'))!!}  
+                    <!-- </form> -->
                   </div>
                 </div>
+                <!-- / Add New Post Form -->
               </div>
-              @endforeach
-              <!-- <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
-                <div class="card card-small card-post card-post--1">
-                  <div class="card-post__image" style="background-image: url('images/content/2.jpeg');">
-                    <a href="#" class="card-post__category badge badge-pill badge-info">Bencana Alam</a>
-                    <div class="card-post__author d-flex">
-                    </div>
+              <div class="col-lg-3 col-md-12">
+                <!-- Post Overview -->
+                <div class='card card-small mb-3'>
+                  <div class="card-header border-bottom">
+                    <h6 class="m-0">Upload Gambar</h6>
                   </div>
-                  <div class="card-body">
-                    <h5 class="card-title">
-                      <a class="text-fiord-blue" href="#">Gunung Merapi Meletus</a>
-                    </h5>
-                    <p class="card-text d-inline-block mb-3">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Est voluptas corporis excepturi voluptatibus velit culpa fuga vitae quisquam!</p>
-                    <span class="text-muted">29 Juli 2019</span>
+                  <div class='card-body p-0'>
+                    <ul class="list-group list-group-flush">
+                      <div class="col-lg-12 col-md12">
+                          <div class="card-height">
+                            <div class="view-img">
+                            <img src="images/upload.jpg" alt="upload" class="image-upload" />
+                            </div>
+                            {!!Form::file('photo',array('class'=>'text-center center-block file-upload', 'id'=>'upload'))!!}
+                            <div class="form-group" style="padding:10px">
+                                <!-- Date input -->
+                                <label class="control-label" for="date">Tanggal Posting</label>
+                                <input class="form-control" id="date" name="date" placeholder="DD/MM/YYYY" type="date" />
+                              </div>
+                          </div>
+                      </div>
+                      <li class="list-group-item d-flex px-3">
+                        <button type="button" value="save" class="btn buttonImage btn-sm btn-outline-accent">
+                          <i class="material-icons">save</i>Upload Gambar</button>
+                        <button type="submit" value="Save" class="btn btn-sm btn-accent ml-auto">
+                          <i class="material-icons">file_copy</i> Publish</button>
+                      </li>
+                    </ul>
                   </div>
                 </div>
+                <!-- / Post Overview -->
+            {!! Form::close() !!}
               </div>
-              <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
-                <div class="card card-small card-post card-post--1">
-                  <div class="card-post__image" style="background-image: url('images/content/3.jpeg');">
-                    <a href="#" class="card-post__category badge badge-pill badge-info">Bencana Alam</a>
-                    <div class="card-post__author d-flex">
-                    </div>
-                  </div>
-                  <div class="card-body">
-                    <h5 class="card-title">
-                      <a class="text-fiord-blue" href="#">Lahar Dingi Yang panas</a>
-                    </h5>
-                    <p class="card-text d-inline-block mb-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore, molestiae fuga doloremque illo architecto illum ducimus ab natus?</p>
-                    <span class="text-muted">29 Juli 2019</span>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
-                <div class="card card-small card-post card-post--1">
-                  <div class="card-post__image" style="background-image: url('images/content/4.jpeg');">
-                    <a href="#" class="card-post__category badge badge-pill badge-info">Bencana Alam</a>
-                    <div class="card-post__author d-flex">
-                    </div>
-                  </div>
-                  <div class="card-body">
-                    <h5 class="card-title">
-                      <a class="text-fiord-blue" href="#">Letusan Merapi sampai ke bu RT</a>
-                    </h5>
-                    <p class="card-text d-inline-block mb-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi non, aspernatur nam aperiam et quo consequatur amet velit?</p>
-                    <span class="text-muted">29 Juli 2019</span>
-                  </div>
-                </div>
-              </div> -->
             </div>
           </div>
           <footer class="main-footer d-flex p-2 px-3 bg-white border-top">
@@ -240,24 +229,68 @@
                 <a class="nav-link" href="#">Blog</a>
               </li>
             </ul>
-            <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/Sharrre/2.0.1/jquery.sharrre.min.js"></script>
-            <script src="scripts/dashboard-silo.js"></script>
+            
           </footer>
         </main>
       </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Sharrre/2.0.1/jquery.sharrre.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/quill/1.3.6/quill.min.js"></script>
+    <script src="scripts/app/text-editor.js"></script>
+    <script src="scripts/dashboard-silo.js"></script>
+    <script src="scripts/script.js"></script>
+
   </body>
 </html>
 
 <style>
-#card-truncate{
-  min-width:200px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+#upload {
+  display: none;
+}
+.buttonImage span {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  -webkit-transition: all 0.15s;
+  -webkit-backface-visibility: hidden;
+  -moz-transition: all 0.15s;
+  -moz-backface-visibility: hidden;
+  transition: all 0.15s;
+  backface-visibility: hidden;
+}
+
+.buttonImage:hover:after {
+  top: 0;
+}
+
+.buttonImage:hover span {
+  -webkit-transform: translateY(300%);
+  -moz-transform: translateY(300%);
+  -ms-transform: translateY(300%);
+  transform: translateY(300%);
+}
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800);
+
+.image-upload{
+  padding: 10px;
+  width:250px;
+  
+}
+.blue-btn:hover,
+.blue-btn:active,
+.blue-btn:focus,
+.blue-btn {
+  background: transparent;
+  border: solid 1px #27a9e0;
+  border-radius: 3px;
+  color: #27a9e0;
+  font-size: 16px;
+  margin-bottom: 20px;
+  outline: none !important;
+  padding: 10px 20px;
 }
 </style>

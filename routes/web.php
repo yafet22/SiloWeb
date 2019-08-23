@@ -17,5 +17,9 @@ Route::get('/add-new-post', function () {
     return view('add-new-post');
 })->name('new-post');
 
+Route::get('/detail-posting',function(){
+    return view('posting-detail');
+})->name('detail-posting');
+
 Route::resource('Posting','PostingController');
 Route::get('/blog-posting','PostingController@index');
