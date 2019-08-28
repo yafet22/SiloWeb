@@ -166,7 +166,7 @@
                           <option>Pertanian</option>
                         </select> -->
                         {!!Form::select('category', array('Bencana Alam' => 'Bencana Alam', 'Pertanian' => 'Pertanian'),'Bencana Alam',array('class'=>'form-control','id'=>'inputKategori'))!!}
-                      </div>
+                      </div> 
                       <!-- <div id="editor-container" class="add-new-post__editor mb-1"></div> -->
                       <!-- <textarea name="descrption" style="display:none" id="hiddenArea"></textarea> -->
                       {!!Form::textarea('description',null,array('placeholder'

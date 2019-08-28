@@ -21,5 +21,9 @@ Route::get('/detail-posting',function(){
     return view('posting-detail');
 })->name('detail-posting');
 
+Route::get('/user-profile',function(){
+    return view('user-profile');
+})->name('user-profile');
+
 Route::resource('Posting','PostingController');
 Route::get('/blog-posting','PostingController@index');
