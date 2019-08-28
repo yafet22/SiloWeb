@@ -29,3 +29,5 @@ Route::get('pertanian','PostingRestController@showPertanian');
 
 Route::resource('comment','CommentRestController');
 Route::get('comment-post/{id}','CommentRestController@showbyPost');
+
+Route::resource('landmark','LandMarkRestController');
