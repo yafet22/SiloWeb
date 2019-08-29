@@ -25,5 +25,10 @@ Route::get('/user-profile',function(){
     return view('user-profile');
 })->name('user-profile');
 
+Route::get('/facilities',function(){
+    return view('facilities');
+})->name('facilities');
+
+
 Route::resource('Posting','PostingController');
 Route::get('/blog-posting','PostingController@index');

@@ -59,7 +59,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link " href="{{ url('user-profile') }}">
+                <a class="nav-link " href="{{ url('facilities') }}">
                   <i class="material-icons">perm_data_setting</i>
                   <span>Fasilitas</span>
                 </a>
