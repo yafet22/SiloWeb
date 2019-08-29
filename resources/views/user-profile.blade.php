@@ -41,7 +41,7 @@
           <div class="nav-wrapper">
             <ul class="nav flex-column">
               <li class="nav-item">
-                <a class="nav-link active" href="{{ url('/') }}">
+                <a class="nav-link" href="{{ url('/') }}">
                   <i class="material-icons">edit</i>
                   <span>Dashboard</span>
                 </a>
@@ -59,7 +59,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link " href="{{ url('user-profile') }}">
+                <a class="nav-link active" href="{{ url('user-profile') }}">
                   <i class="material-icons">person</i>
                   <span>Profile Pengguna</span>
                 </a>
