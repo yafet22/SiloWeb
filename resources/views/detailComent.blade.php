@@ -53,19 +53,13 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{{ url('/add-new-post') }}">
+                <a class="nav-link active" href="{{ url('/add-new-post') }}">
                   <i class="material-icons">note_add</i>
                   <span>Tambah Postingan Baru</span>
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" href="{{ url('facilities') }}">
-                  <i class="material-icons">perm_data_setting</i>
-                  <span>Fasilitas</span>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{{ url('user-profile') }}">
+                <a class="nav-link " href="{{ url('user-profile') }}">
                   <i class="material-icons">person</i>
                   <span>Profile Pengguna</span>
                 </a>
@@ -151,127 +145,72 @@
             <!-- Page Header -->
             <div class="page-header row no-gutters py-4">
               <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
-                <span class="text-uppercase page-subtitle">Fasilitas</span>
-                <h3 class="page-title">Pengelolaan Fasilitas</h3>
+                <span class="text-uppercase page-subtitle">Semua Fasilitas</span>
+                <h3 class="page-title">Tambah Fasilitas Baru</h3>
               </div>
             </div>
             <!-- End Page Header -->
             {!!Form::open(array('route' => 'Posting.store','method'=>'POST','enctype'=>'multipart/form-data','id'=>'identifier'))!!}
             <div class="row">
-              <div class="col-lg-12 col-md-12">
-							<div class="col">
-                  <div class="card card-small mb-4">
-                      <div class="card-header border-bottom">
-												<div class="row">
-														<div class="col-lg-3 col-md-3">
-														<h6 class="m-0">Semua Postingan Fasilitas</h6>
-														</div>
-														<div class="col-lg-9 col-md-9" style="padding:0 120px 0 120px ">
-														<a style="float:right" type="button" value="Save" class="btn btn-sm btn-accent ml-auto"  href="{{ url('detailComent') }}">
-															<i class="material-icons">file_copy</i> Tambahkan Fasilitas</a>	
-														</div>
-												</div>
-											</div>
-											
-                      <div class="card-body p-0 pb-3 text-center">
-                        <table class="table mb-0">
-                          <thead class="bg-light">
-                            <tr>
-                              <th scope="col" class="border-0">No</th>
-                              <th scope="col" class="border-0">Gambar</th>
-                              <th scope="col" class="border-0">Nama Tempat</th>
-															<th scope="col" class="border-0">Jenis Tempat</th>
-                              <th scope="col" class="border-0">Aksi</th>
-															
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr>
-                              <td>1</td>
-                              <td><div class="blog-comments__avatar mr-3">
-                                <img src="images/avatars/yuri.png" alt="User avatar" /> </div> </div></td>
-                              <td>agung</td>
-                              <td>12345678</td>
-                              <td>
-                              <div class="blog-comments__actions">
-                                <div class="btn-group btn-group-sm">
-                                  <button type="button" class="btn btn-white">
-                                    <span class="text-danger">
-                                      <i class="material-icons">clear</i>
-                                    </span> Hapus </button>
-                                  <button type="button" class="btn btn-white">
-                                    <span class="text-warning">
-                                      <i class="material-icons">edit</i>
-                                    </span> Edit </button>
-                                    <button type="button" class="btn btn-white">
-                                  <span class="text-success">
-                                    <i class="material-icons">visibility</i>
-                                  </span> Detail </button>
-                                </div>
+              <div class="col-lg-9 col-md-12">
+                <!-- Add New Post Form -->
+                <div class="card card-small mb-3">
+                  <div class="card-body">
+                    <!-- <form class="add-new-post"> -->
+                      <!-- <input class="form-control form-control-lg mb-3" type="text" placeholder="judul"> -->
+                      {!!Form::text('title',null,array('placeholder'=>'Nama Tempat','class'=>'form-control form-control-lg mb-3','id'=>'inputJudul'))!!}  
+                      <div class="form-group">
+                        <!-- <select class="formcomposer require "laravelcollective/html":"^5.8.0"-control">
+                          <option selected>Pilih Kategory</option>
+                          <option>Bencana Alam</option>
+                          <option>Pertanian</option>
+                        </select> -->
+                        {!!Form::select('category', array('Hotel' => 'Hotel', 'Tempat wisata' => 'Tempat wisata'),'Hotel',array('class'=>'form-control','id'=>'inputKategori'))!!}
+                      </div> 
+                      <!-- <div id="editor-container" class="add-new-post__editor mb-1"></div> -->
+                      <!-- <textarea name="descrption" style="display:none" id="hiddenArea"></textarea> -->
+                      {!!Form::textarea('description',null,array('placeholder'
+                                        =>'Deskripsi','class'=>'form-control','rows'=>'18','id'=>'hiddenArea'))!!}  
+                    <!-- </form> -->
+                  </div>
+                </div>
+                <!-- / Add New Post Form -->
+              </div>
+              <div class="col-lg-3 col-md-12">
+                <!-- Post Overview -->
+                <div class='card card-small mb-3'>
+                  <div class="card-header border-bottom">
+                    <h6 class="m-0">Upload Gambar</h6>
+                  </div>
+                  <div class='card-body p-0'>
+                    <ul class="list-group list-group-flush">
+                      <div class="col-lg-12 col-md12">
+                          <div class="card-height">
+                            <div class="view-img">
+                            <img src="images/upload.jpg" alt="upload" class="image-upload" />
+                            </div>
+                            {!!Form::file('photo',array('class'=>'text-center center-block file-upload', 'id'=>'upload'))!!}
+                            <div class="form-group" style="padding:10px">
+                                <!-- Date input -->
+                                <label class="control-label" for="date">Tanggal Posting</label>
+                                <input class="form-control" id="date" name="date" placeholder="DD/MM/YYYY" type="date" />
                               </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>1</td>
-                              <td><div class="blog-comments__avatar mr-3">
-                                <img src="images/avatars/yuri.png" alt="User avatar" /> </div> </div></td>
-                              <td>agung</td>
-                              <td>12345678</td>
-                              <td>
-                              <div class="blog-comments__actions">
-                                <div class="btn-group btn-group-sm">
-                                  <button type="button" class="btn btn-white">
-                                    <span class="text-danger">
-                                      <i class="material-icons">clear</i>
-                                    </span> Hapus </button>
-                                  <button type="button" class="btn btn-white">
-                                    <span class="text-warning">
-                                      <i class="material-icons">edit</i>
-                                    </span> Edit </button>
-                                    <button type="button" class="btn btn-white">
-                                  <span class="text-success">
-                                    <i class="material-icons">visibility</i>
-                                  </span> Detail </button>
-                                </div>
-                              </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>1</td>
-                              <td><div class="blog-comments__avatar mr-3">
-                                <img src="images/avatars/yuri.png" alt="User avatar" /> </div> </div></td>
-                              <td>Lorem ipsum dolor sit amet.</td>
-                              <td>12345678</td>
-                              <td>
-                              <div class="blog-comments__actions">
-                                <div class="btn-group btn-group-sm">
-                                  <button type="button" class="btn btn-white">
-                                    <span class="text-danger">
-                                      <i class="material-icons">clear</i>
-                                    </span> Hapus </button>
-                                  <button type="button" class="btn btn-white">
-                                    <span class="text-warning">
-                                      <i class="material-icons">edit</i>
-                                    </span> Edit </button>
-                                  <button type="button" class="btn btn-white">
-                                  <span class="text-success">
-                                    <i class="material-icons">visibility</i>
-                                  </span> Detail </button>
-                                </div>
-                              </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
+                          </div>
                       </div>
-                    </div>
+                      <li class="list-group-item d-flex px-3">
+                        <button type="button" value="save" class="btn buttonImage btn-sm btn-outline-accent">
+                          <i class="material-icons">save</i>Upload Gambar</button>
+                        <button type="submit" value="Save" class="btn btn-sm btn-accent ml-auto">
+                          <i class="material-icons">file_copy</i> Publish</button>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <!-- / Post Overview -->
+            {!! Form::close() !!}
               </div>
             </div>
           </div>
-              </div	>
-            </div>
-          </div>
-					
           <footer class="main-footer d-flex p-2 px-3 bg-white border-top">
             <ul class="nav">
               <li class="nav-item">
