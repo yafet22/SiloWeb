@@ -31,3 +31,7 @@ Route::resource('comment','CommentRestController');
 Route::get('comment-post/{id}','CommentRestController@showbyPost');
 
 Route::resource('landmark','LandMarkRestController');
+Route::get('kesehatan','LandMarkRestController@showKesehatan');
+Route::get('penginapan','LandMarkRestController@showPenginapan');
+Route::get('infopasar','LandMarkRestController@showInfoPasar');
+Route::get('restoran','LandMarkRestController@showRestoran');

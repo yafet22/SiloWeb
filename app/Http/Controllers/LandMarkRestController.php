@@ -95,6 +95,62 @@ class LandMarkRestController extends RestController
         }
     }
 
+    public function showPenginapan()
+    {
+        try {
+            $landmarks=Landmark::where('category','=',
+            'Penginapan')->get();
+            $response = $this->generateCollection($landmarks);
+            return $this->sendResponse($response); 
+        } catch (ModelNotFoundException $e) {
+            return $this->sendNotFoundResponse('landmark_not_found');
+        } catch (\Exception $e) {
+            return $this->sendIseResponse($e->getMessage());
+        }
+    }
+
+    public function showRestoran()
+    {
+        try {
+            $landmarks=Landmark::where('category','=',
+            'Restoran')->get();
+            $response = $this->generateCollection($landmarks);
+            return $this->sendResponse($response); 
+        } catch (ModelNotFoundException $e) {
+            return $this->sendNotFoundResponse('landmark_not_found');
+        } catch (\Exception $e) {
+            return $this->sendIseResponse($e->getMessage());
+        }
+    }
+
+    public function showInfoPasar()
+    {
+        try {
+            $landmarks=Landmark::where('category','=',
+            'Info Pasar')->get();
+            $response = $this->generateCollection($landmarks);
+            return $this->sendResponse($response); 
+        } catch (ModelNotFoundException $e) {
+            return $this->sendNotFoundResponse('landmark_not_found');
+        } catch (\Exception $e) {
+            return $this->sendIseResponse($e->getMessage());
+        }
+    }
+
+    public function showKesehatan()
+    {
+        try {
+            $landmarks=Landmark::where('category','=',
+            'Kesehatan')->get();
+            $response = $this->generateCollection($landmarks);
+            return $this->sendResponse($response); 
+        } catch (ModelNotFoundException $e) {
+            return $this->sendNotFoundResponse('landmark_not_found');
+        } catch (\Exception $e) {
+            return $this->sendIseResponse($e->getMessage());
+        }
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
