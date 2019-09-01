@@ -6,7 +6,7 @@ $(document).ready(function() {
       
       reader.onload = function(e) {
         $('.view-img img').attr('src', e.target.result);
-      }
+      };
 
       reader.readAsDataURL(input.files[0]);
     }

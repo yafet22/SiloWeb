@@ -3,14 +3,14 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Admin Siselo</title>
+    <title>Admin SELO</title>
     <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" id="main-stylesheet" data-version="1.1.0" href="styles/dashboard-silo.css">
     <link rel="stylesheet" href="styles/extras.1.1.0.min.css">
     <script async defer src="https://buttons.github.io/buttons.js"></script>
-  </head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/quill/1.3.6/quill.snow.css"> </head>
   <body class="h-100">
     <div class="container-fluid">
       <div class="row">
@@ -20,7 +20,7 @@
             <nav class="navbar align-items-stretch navbar-light bg-white flex-md-nowrap border-bottom p-0">
               <a class="navbar-brand w-100 mr-0" href="#" style="line-height: 25px;">
                 <div class="d-table m-auto">
-                  <img id="main-logo" class="d-inline-block align-top mr-1" style="max-width: 25px;" src="images/logo.png" alt="Dashboard Silo">
+                  <img id="main-logo" class="d-inline-block align-top mr-1" style="max-width: 25px;" src="images/logo.png" alt="Silo Dashboard">
                   <span class="d-none d-md-inline ml-1">Admin Selo</span>
                 </div>
               </a>
@@ -41,7 +41,7 @@
           <div class="nav-wrapper">
             <ul class="nav flex-column">
               <li class="nav-item">
-                <a class="nav-link active" href="{{ url('/') }}">
+                <a class="nav-link" href="{{ url('/') }}">
                   <i class="material-icons">edit</i>
                   <span>Dashboard</span>
                 </a>
@@ -53,19 +53,19 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link " href="{{ url('/add-new-post') }}">
+                <a class="nav-link" href="{{ url('/add-new-post') }}">
                   <i class="material-icons">note_add</i>
                   <span>Tambah Postingan Baru</span>
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link " href="{{ url('facilities') }}">
+                <a class="nav-link active" href="{{ url('facilities') }}">
                   <i class="material-icons">perm_data_setting</i>
                   <span>Fasilitas</span>
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link " href="{{ url('user-profile') }}">
+                <a class="nav-link" href="{{ url('user-profile') }}">
                   <i class="material-icons">person</i>
                   <span>Profile Pengguna</span>
                 </a>
@@ -151,202 +151,116 @@
             <!-- Page Header -->
             <div class="page-header row no-gutters py-4">
               <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
-                <span class="text-uppercase page-subtitle">Tampilan Awal</span>
-                <h3 class="page-title">Tampilan Keseluruhan</h3>
+                <span class="text-uppercase page-subtitle">Fasilitas</span>
+                <h3 class="page-title">Pengelolaan Fasilitas</h3>
               </div>
             </div>
             <!-- End Page Header -->
-            <!-- Small Stats Blocks -->
+            {!!Form::open(array('route' => 'Posting.store','method'=>'POST','enctype'=>'multipart/form-data','id'=>'identifier'))!!}
             <div class="row">
-              <div class="col-lg col-md-6 col-sm-6 mb-4">
-                <div class="stats-small stats-small--1 card card-small">
-                  <div class="card-body p-0 d-flex">
-                    <div class="d-flex flex-column m-auto">
-                      <div class="stats-small__data text-center">
-                        <span class="stats-small__label text-uppercase">Jumlah Postingan</span>
-                        <h6 class="stats-small__value count my-3">90</h6>
-                      </div>
-                    </div>
-                    <canvas height="120" class="blog-overview-stats-small-1"></canvas>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg col-md-6 col-sm-6 mb-4">
-                <div class="stats-small stats-small--1 card card-small">
-                  <div class="card-body p-0 d-flex">
-                    <div class="d-flex flex-column m-auto">
-                      <div class="stats-small__data text-center">
-                        <span class="stats-small__label text-uppercase">Jumlah Komentar</span>
-                        <h6 class="stats-small__value count my-3">182</h6>
-                      </div>
-                      <div class="stats-small__data">
-                      </div>
-                    </div>
-                    <canvas height="120" class="blog-overview-stats-small-2"></canvas>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg col-md-4 col-sm-6 mb-4">
-                <div class="stats-small stats-small--1 card card-small">
-                  <div class="card-body p-0 d-flex">
-                    <div class="d-flex flex-column m-auto">
-                      <div class="stats-small__data text-center">
-                        <span class="stats-small__label text-uppercase">Jumlah Pengguna</span>
-                        <h6 class="stats-small__value count my-3">{{ $numberofusers }}</h6>
-                      </div>
-                      <div class="stats-small__data">
-                      </div>
-                    </div>
-                    <canvas height="120" class="blog-overview-stats-small-3"></canvas>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg col-md-4 col-sm-6 mb-4">
-                <div class="stats-small stats-small--1 card card-small">
-                  <div class="card-body p-0 d-flex">
-                    <div class="d-flex flex-column m-auto">
-                      <div class="stats-small__data text-center">
-                        <span class="stats-small__label text-uppercase">Jumlah Admin</span>
-                        <h6 class="stats-small__value count my-3">5</h6>
-                      </div>
-                      <div class="stats-small__data">
-                      </div>
-                    </div>
-                    <canvas height="120" class="blog-overview-stats-small-4"></canvas>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- End Small Stats Blocks -->
-            <div class="row">
-              <div class="col-lg-5 col-md-12 col-sm-12 mb-4">
-                <div class="card card-small blog-comments">
-                  <div class="card-header border-bottom">
-                    <h6 class="m-0">Pendaftar anggota baru</h6>
-                  </div>
-                  <div class="card-body p-0">
-                    <div class="blog-comments__item d-flex p-3">
-                      <div class="blog-comments__avatar mr-3">
-                        <img src="images/avatars/yuri.png" alt="User avatar" /> </div>
-                      <div class="blog-comments__content">
-                        <div class="blog-comments__meta text-muted">
-                          <a class="text-secondary" href="#">Makrifah amin</a>
-                          <span class="text-muted">– 3 hari Yang Lalu</span>
-                        </div>
-                        <p class="m-0 my-1 mb-2 text-muted">081254026142</p>
-                        <div class="blog-comments__actions">
-                          <div class="btn-group btn-group-sm">
-                            <button type="button" class="btn btn-white">
-                              <span class="text-success">
-                                <i class="material-icons">check</i>
-                              </span> Aktifkan </button>
-                            <button type="button" class="btn btn-white">
-                              <span class="text-danger">
-                                <i class="material-icons">clear</i>
-                              </span> Hapus </button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="blog-comments__item d-flex p-3">
-                      <div class="blog-comments__avatar mr-3">
-                        <img src="images/avatars/yuri.png" alt="User avatar" /> </div>
-                      <div class="blog-comments__content">
-                        <div class="blog-comments__meta text-muted">
-                          <a class="text-secondary" href="#">Makrifah amin</a>
-                          <span class="text-muted">– 4 hari Yang Lalu</span>
-                        </div>
-                        <p class="m-0 my-1 mb-2 text-muted">081254026142</p>
-                        <div class="blog-comments__actions">
-                          <div class="btn-group btn-group-sm">
-                            <button type="button" class="btn btn-white">
-                              <span class="text-success">
-                                <i class="material-icons">check</i>
-                              </span> Aktifkan </button>
-                            <button type="button" class="btn btn-white">
-                              <span class="text-danger">
-                                <i class="material-icons">clear</i>
-                              </span> Hapus </button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="blog-comments__item d-flex p-3">
-                      <div class="blog-comments__avatar mr-3">
-                        <img src="images/avatars/yuri.png" alt="User avatar" /> </div>
-                      <div class="blog-comments__content">
-                        <div class="blog-comments__meta text-muted">
-                          <a class="text-secondary" href="#">Makrifah amin</a>
-                          <span class="text-muted">– 5 hari Yang Lalu</span>
-                        </div>
-                        <p class="m-0 my-1 mb-2 text-muted">081254026142</p>
-                        <div class="blog-comments__actions">
-                          <div class="btn-group btn-group-sm">
-                            <button type="button" class="btn btn-white">
-                              <span class="text-success">
-                                <i class="material-icons">check</i>
-                              </span> Aktifkan </button>
-                            <button type="button" class="btn btn-white">
-                              <span class="text-danger">
-                                <i class="material-icons">clear</i>
-                              </span> Hapus </button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card-footer border-top">
-                    <div class="row">
-                      <div class="col text-center view-report">
-                        <button type="submit" class="btn btn-white">Lihat Semua Pengguna Baru</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col">
+              <div class="col-lg-12 col-md-12">
+							<div class="col">
                   <div class="card card-small mb-4">
                       <div class="card-header border-bottom">
-                        <h6 class="m-0">Semua Anggota</h6>
-                      </div>
+												<div class="row">
+														<div class="col-lg-3 col-md-3">
+														<h6 class="m-0">Semua Postingan Fasilitas</h6>
+														</div>
+														<div class="col-lg-9 col-md-9" style="padding:0 120px 0 120px ">
+														<a style="float:right" type="button" value="Save" class="btn btn-sm btn-accent ml-auto"  href="{{ url('detailComent') }}">
+															<i class="material-icons">file_copy</i> Tambahkan Fasilitas</a>	
+														</div>
+												</div>
+											</div>
+											
                       <div class="card-body p-0 pb-3 text-center">
                         <table class="table mb-0">
                           <thead class="bg-light">
                             <tr>
                               <th scope="col" class="border-0">No</th>
                               <th scope="col" class="border-0">Gambar</th>
-                              <th scope="col" class="border-0">Nama</th>
-                              <th scope="col" class="border-0">Nomor HP</th>
-                              <th scope="col" class="border-0">Status</th>
+                              <th scope="col" class="border-0">Nama Tempat</th>
+															<th scope="col" class="border-0">Jenis Tempat</th>
+                              <th scope="col" class="border-0">Aksi</th>
+															
                             </tr>
                           </thead>
                           <tbody>
-                            @foreach($users as $user)
                             <tr>
                               <td>1</td>
                               <td><div class="blog-comments__avatar mr-3">
                                 <img src="images/avatars/yuri.png" alt="User avatar" /> </div> </div></td>
-                              <td>{{ $user->name }}</td>
-                              <td>{{ $user->phone_number }}</td>
+                              <td>agung</td>
+                              <td>12345678</td>
                               <td>
-                                @if($user->status=='verified')
-                                <div class="btn-group btn-group-toggle mb-3" data-toggle="buttons">
-                                  <label class="btn btn-white active">
-                                    <input type="radio" name="options" id="option1" autocomplete="off" checked> Aktiv </label>
-                                  <label class="btn btn-white">
-                                    <input type="radio" name="options" id="option2" autocomplete="off"> Tidak Aktiv </label>
+                              <div class="blog-comments__actions">
+                                <div class="btn-group btn-group-sm">
+                                  <button type="button" class="btn btn-white">
+                                    <span class="text-danger">
+                                      <i class="material-icons">clear</i>
+                                    </span> Hapus </button>
+                                  <button type="button" class="btn btn-white">
+                                    <span class="text-warning">
+                                      <i class="material-icons">edit</i>
+                                    </span> Edit </button>
+                                    <button type="button" class="btn btn-white">
+                                  <span class="text-success">
+                                    <i class="material-icons">visibility</i>
+                                  </span> Detail </button>
                                 </div>
-                                @elseif($user->status=='pending')
-                                <div class="btn-group btn-group-toggle mb-3" data-toggle="buttons">
-                                  <label class="btn btn-white active">
-                                    <input type="radio" name="options" id="option1" autocomplete="off"> Aktiv </label>
-                                  <label class="btn btn-white">
-                                    <input type="radio" name="options" id="option2" autocomplete="off" checked> Tidak Aktiv </label>
-                                </div>
-                                @endif
+                              </div>
                               </td>
                             </tr>
-                            @endforeach
+                            <tr>
+                              <td>1</td>
+                              <td><div class="blog-comments__avatar mr-3">
+                                <img src="images/avatars/yuri.png" alt="User avatar" /> </div> </div></td>
+                              <td>agung</td>
+                              <td>12345678</td>
+                              <td>
+                              <div class="blog-comments__actions">
+                                <div class="btn-group btn-group-sm">
+                                  <button type="button" class="btn btn-white">
+                                    <span class="text-danger">
+                                      <i class="material-icons">clear</i>
+                                    </span> Hapus </button>
+                                  <button type="button" class="btn btn-white">
+                                    <span class="text-warning">
+                                      <i class="material-icons">edit</i>
+                                    </span> Edit </button>
+                                    <button type="button" class="btn btn-white">
+                                  <span class="text-success">
+                                    <i class="material-icons">visibility</i>
+                                  </span> Detail </button>
+                                </div>
+                              </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>1</td>
+                              <td><div class="blog-comments__avatar mr-3">
+                                <img src="images/avatars/yuri.png" alt="User avatar" /> </div> </div></td>
+                              <td>Lorem ipsum dolor sit amet.</td>
+                              <td>12345678</td>
+                              <td>
+                              <div class="blog-comments__actions">
+                                <div class="btn-group btn-group-sm">
+                                  <button type="button" class="btn btn-white">
+                                    <span class="text-danger">
+                                      <i class="material-icons">clear</i>
+                                    </span> Hapus </button>
+                                  <button type="button" class="btn btn-white">
+                                    <span class="text-warning">
+                                      <i class="material-icons">edit</i>
+                                    </span> Edit </button>
+                                  <button type="button" class="btn btn-white">
+                                  <span class="text-success">
+                                    <i class="material-icons">visibility</i>
+                                  </span> Detail </button>
+                                </div>
+                              </div>
+                              </td>
+                            </tr>
                           </tbody>
                         </table>
                       </div>
@@ -354,6 +268,10 @@
               </div>
             </div>
           </div>
+              </div	>
+            </div>
+          </div>
+					
           <footer class="main-footer d-flex p-2 px-3 bg-white border-top">
             <ul class="nav">
               <li class="nav-item">
@@ -382,6 +300,58 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Sharrre/2.0.1/jquery.sharrre.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/quill/1.3.6/quill.min.js"></script>
+    <script src="scripts/app/text-editor.js"></script>
     <script src="scripts/dashboard-silo.js"></script>
+    <script src="scripts/script.js"></script>
+
   </body>
 </html>
+
+<style>
+#upload {
+  display: none;
+}
+.buttonImage span {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  -webkit-transition: all 0.15s;
+  -webkit-backface-visibility: hidden;
+  -moz-transition: all 0.15s;
+  -moz-backface-visibility: hidden;
+  transition: all 0.15s;
+  backface-visibility: hidden;
+}
+
+.buttonImage:hover:after {
+  top: 0;
+}
+
+.buttonImage:hover span {
+  -webkit-transform: translateY(300%);
+  -moz-transform: translateY(300%);
+  -ms-transform: translateY(300%);
+  transform: translateY(300%);
+}
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800);
+
+.image-upload{
+  padding: 10px;
+  width:250px;
+  
+}
+.blue-btn:hover,
+.blue-btn:active,
+.blue-btn:focus,
+.blue-btn {
+  background: transparent;
+  border: solid 1px #27a9e0;
+  border-radius: 3px;
+  color: #27a9e0;
+  font-size: 16px;
+  margin-bottom: 20px;
+  outline: none !important;
+  padding: 10px 20px;
+}
+</style>
